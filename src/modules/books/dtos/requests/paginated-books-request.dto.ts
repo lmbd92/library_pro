@@ -1,6 +1,7 @@
 import { IsNumber, IsOptional, IsString } from 'class-validator';
+import { BookRequestDto } from './books-request.dto';
 
-export class PaginatedBooksRequestDto {
+export class PaginatedBooksRequestDto extends BookRequestDto {
   @IsNumber()
   @IsOptional()
   docsPerPage?: number;
