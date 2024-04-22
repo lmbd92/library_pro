@@ -7,7 +7,7 @@ export class Book extends Document {
   bookId: string;
 
   @Prop({ required: true })
-  name: string;
+  title: string;
 
   @Prop({ required: true })
   author: string;
