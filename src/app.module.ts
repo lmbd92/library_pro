@@ -4,6 +4,7 @@ import { ClientsModule } from './modules/clients/clients.module';
 import { PersistenceModule } from './libs/persistence/persistence.module';
 import { ConfigModule } from '@nestjs/config';
 import dbConfig from './libs/persistence/db-config';
+import { AuthModule } from './libs/auth/auth.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import dbConfig from './libs/persistence/db-config';
       isGlobal: true,
     }),
     PersistenceModule,
+    AuthModule,
     BooksModule,
     ClientsModule,
   ],
