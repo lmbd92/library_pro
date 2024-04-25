@@ -9,43 +9,60 @@ export class BooksService {
   constructor(@InjectModel(Book.name) protected bookModel: Model<Book>) {}
 
   async create(createBookDto: BookDto): Promise<Book> {
-    const createdBook = new this.bookModel(createBookDto);
-    return createdBook.save();
+    try {
+      const createdBook = new this.bookModel(createBookDto);
+      return await createdBook.save();
+    } catch (error) {
+      this.throwUnhandledError(error, 'create', error.message);
+    }
   }
 
   async findAll(): Promise<Book[]> {
-    return this.bookModel.find().exec();
+    try {
+      return await this.bookModel.find().exec();
+    } catch (error) {
+      this.throwUnhandledError(error, 'findAll', error.message);
+    }
   }
 
   async findOne(id: string): Promise<Book> {
-    return this.bookModel.findOne({ bookId: id }).exec();
+    try {
+      return await this.bookModel.findOne({ bookId: id }).exec();
+    } catch (error) {
+      this.throwUnhandledError(
+        error,
+        'findOne',
+        `Failed to fetch book with id ${id} error: ${error.message}`,
+      );
+    }
   }
 
-  findPaginated(
+  async findPaginated(
     filter: FilterQuery<Book>,
     sort?: Record<string, SortOrder>,
     limit = 400,
     skip = 0,
   ): Promise<any[]> {
-    return this.bookModel
-      .find(filter)
-      .sort(sort)
-      .skip(skip)
-      .limit(limit)
-      .catch((error) =>
-        this.throwUnhandledError(
-          error,
-          'findSortedPaginated',
-          `Book couldn't be returned`,
-        ),
-      )
-      .then((records) => {
-        if (!records) {
-          return null;
-        }
+    try {
+      const records = await this.bookModel
+        .find(filter)
+        .sort(sort)
+        .skip(skip)
+        .limit(limit)
+        .exec();
 
-        return records.map((record) => this.mapEntityToDto(record));
-      });
+      if (!records) {
+        return null;
+      }
+
+      return records.map((record) => this.mapEntityToDto(record));
+    } catch (error) {
+      this.throwUnhandledError(
+        error,
+        'findPaginated',
+        'Failed to fetch paginated books',
+      );
+    }
   }
 
   throwUnhandledError(error: any, context: string, message: string): never {
@@ -59,12 +76,28 @@ export class BooksService {
   }
 
   async update(id: string, updateBookDto: BookDto): Promise<Book> {
-    return this.bookModel
-      .findOneAndUpdate({ bookId: id }, updateBookDto, { new: true })
-      .exec();
+    try {
+      return await this.bookModel
+        .findOneAndUpdate({ bookId: id }, updateBookDto, { new: true })
+        .exec();
+    } catch (error) {
+      this.throwUnhandledError(
+        error,
+        'update',
+        `Failed to update book with id ${id}`,
+      );
+    }
   }
 
   async remove(id: string): Promise<Book> {
-    return this.bookModel.findOneAndDelete({ bookId: id }).exec();
+    try {
+      return await this.bookModel.findOneAndDelete({ bookId: id }).exec();
+    } catch (error) {
+      this.throwUnhandledError(
+        error,
+        'remove',
+        `Failed to remove book with id ${id}`,
+      );
+    }
   }
 }
