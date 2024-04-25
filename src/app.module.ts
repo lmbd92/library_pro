@@ -5,6 +5,10 @@ import { PersistenceModule } from './libs/persistence/persistence.module';
 import { ConfigModule } from '@nestjs/config';
 import dbConfig from './libs/persistence/db-config';
 import { AuthModule } from './libs/auth/auth.module';
+import { SharedModule } from './libs/shared/shared.module';
+import { APP_GUARD } from '@nestjs/core';
+import { AtGuard } from './libs/auth/guards/at.guard';
+import { UsersModule } from './modules/users/users.module';
 
 @Module({
   imports: [
@@ -15,10 +19,17 @@ import { AuthModule } from './libs/auth/auth.module';
     }),
     PersistenceModule,
     AuthModule,
+    SharedModule,
     BooksModule,
     ClientsModule,
+    UsersModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: AtGuard,
+    },
+  ],
 })
 export class AppModule {}
