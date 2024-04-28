@@ -1,0 +1,265 @@
+{
+	"info": {
+		"_postman_id": "ac9aadb3-8bef-4834-b9a0-d16ab85aca46",
+		"name": "Library_API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "2026388"
+	},
+	"item": [
+		{
+			"name": "books",
+			"item": [
+				{
+					"name": "Create_book",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bookId\": \"5\",\n    \"title\": \"Vivir para contarla\",\n    \"author\": \"Gabriel Garcia Marquez\",\n    \"pages\": 800, \n    \"description\": \"Lorem ipsum dolerm is dolerm ipsum is bookId\"\n\n\n}"
+						},
+						"url": "{{base-url}}/books"
+					},
+					"response": []
+				},
+				{
+					"name": "Get_all_books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base-url}}/books"
+					},
+					"response": []
+				},
+				{
+					"name": "Get_paginated_books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/books/paginated?docsPerPage=0&offset=0",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"books",
+								"paginated"
+							],
+							"query": [
+								{
+									"key": "docsPerPage",
+									"value": "0"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get_by_id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base-url}}/books/8"
+					},
+					"response": []
+				},
+				{
+					"name": "Update_by_id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"bookId\": \"3\",\n  \"title\": \"Updated Book Title\",\n  \"author\": \"Updated Author Name\",\n  \"pages\": 200,\n  \"description\": \"Updated Book Description\"\n}"
+						},
+						"url": "{{base-url}}/books/8"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete_by_id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{base-url}}/books/9"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "Create_user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"testUser5\",\n  \"email\": \"test5@example.com\",\n  \"password\": \"testPassword5\",\n  \"role\": \"user\"\n}"
+						},
+						"url": "{{base-url}}/user"
+					},
+					"response": []
+				},
+				{
+					"name": "Gel_all_Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": "{{base-url}}/user"
+					},
+					"response": []
+				},
+				{
+					"name": "Get_User_by_ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": "{{base-url}}/user/{id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update_user_by_ID",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userName\": \"updatedUser\",\n  \"email\": \"updated@example.com\",\n  \"password\": \"updatedPassword\"\n}"
+						},
+						"url": "{{base-url}}/user/{id}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete_by_ID",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": "{{base-url}}/user/{id}"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"user@example.com\",\n  \"username\": \"username\",\n  \"password\": \"password123\"\n}"
+						},
+						"url": "{{base-url}}/auth/register"
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"password123\"\n}"
+						},
+						"url": "{{base-url}}/auth/login"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {
+			"token": "{{access_token}}"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base-URL",
+			"value": "http://localhost:3000/v1/api",
+			"type": "string"
+		}
+	]
+}
