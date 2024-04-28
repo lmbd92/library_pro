@@ -66,6 +66,10 @@ $ yarn run test:cov
 node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 ```
 
+## PostMand resources
+
+To test this API you need to use the [postman_collection.json](doc/Library_API.postman_collection.json) file to import the resources to your postman app.
+
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
