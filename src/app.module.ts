@@ -1,14 +1,13 @@
 import { Module } from '@nestjs/common';
-import { BooksModule } from './modules/books/books.module';
-import { ClientsModule } from './modules/clients/clients.module';
-import { PersistenceModule } from './libs/persistence/persistence.module';
 import { ConfigModule } from '@nestjs/config';
-import dbConfig from './libs/persistence/db-config';
-import { AuthModule } from './libs/auth/auth.module';
-import { SharedModule } from './libs/shared/shared.module';
 import { APP_GUARD } from '@nestjs/core';
-import { AtGuard } from './libs/auth/guards/at.guard';
-import { UsersModule } from './modules/users/users.module';
+import { AtGuard } from '@libs/auth/guards/at.guard';
+import { UsersModule } from '@modules/users/users.module';
+import { SharedModule } from '@libs/shared/shared.module';
+import { AuthModule } from '@libs/auth/auth.module';
+import dbConfig from '@libs/persistence/db-config';
+import { PersistenceModule } from '@libs/persistence';
+import { BooksModule } from '@modules/books/books.module';
 
 @Module({
   imports: [
@@ -21,7 +20,6 @@ import { UsersModule } from './modules/users/users.module';
     AuthModule,
     SharedModule,
     BooksModule,
-    ClientsModule,
     UsersModule,
   ],
   controllers: [],

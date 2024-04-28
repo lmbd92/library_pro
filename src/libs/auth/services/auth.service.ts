@@ -39,7 +39,7 @@ export class AuthService {
 
     const user = await this.userService.create({
       email: signUPDto.email,
-      userName: signUPDto.name,
+      username: signUPDto.username,
       password: hashedPassword,
     });
 
@@ -49,9 +49,9 @@ export class AuthService {
   }
 
   async getTokens(jwtPayload: JwtPayload): Promise<Tokens> {
-    const secretKey = process.env.SECRET_KEY;
+    const secretKey = process.env.JWT_SECRET;
     if (!secretKey) {
-      throw new Error('SECRET_KEY is not set');
+      throw new Error('JWT_SECRET is not set');
     }
     const accessTokenOptions = {
       expiresIn: process.env.ACCESS_TOKEN_EXPIRY || '15m',
@@ -74,7 +74,7 @@ export class AuthService {
   }
 
   async validateEmailForSignUp(email: string): Promise<boolean | undefined> {
-    const user = await this.userService.findOneByEmail(email);
+    const user = await this.userService.findOneByEmailRegister(email);
 
     if (user) {
       throw new HttpException('Email already exists!', 400);

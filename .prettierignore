@@ -1,0 +1,12 @@
+# Ignore artifacts:
+dist
+**/dist
+
+#config
+.github
+.eslintrc.js
+.prettierrc
+**/.aws
+README.md
+nest-cli.json
+tsconfig.json
