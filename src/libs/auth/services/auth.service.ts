@@ -1,6 +1,6 @@
 import { BadRequestException, HttpException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { HashService } from '../../shared/services/hash.service';
+import { HashService } from '../../utils/services/hash.service';
 import { SignUpDto, UserLoginDto } from '../dtos/common';
 import { JwtPayload, Tokens } from '../types';
 import { UserService } from 'src/modules/users/services/users.service';
@@ -32,7 +32,7 @@ export class AuthService {
     });
   }
 
-  async signUp(signUPDto: SignUpDto): Promise<Tokens> {
+  async register(signUPDto: SignUpDto): Promise<Tokens> {
     await this.validateEmailForSignUp(signUPDto.email);
 
     const hashedPassword = await this.hashService.hash(signUPDto.password);
