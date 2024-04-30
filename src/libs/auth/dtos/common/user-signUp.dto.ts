@@ -25,4 +25,6 @@ export class SignUpDto {
   @MinLength(8, { message: 'password should be minimmum 8' })
   @MaxLength(50, { message: 'password should be maximium 50' })
   password: string;
+
+  role: string;
 }

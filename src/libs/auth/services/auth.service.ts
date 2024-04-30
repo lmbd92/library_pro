@@ -32,15 +32,16 @@ export class AuthService {
     });
   }
 
-  async register(signUPDto: SignUpDto): Promise<Tokens> {
-    await this.validateEmailForSignUp(signUPDto.email);
+  async register(userRegister: SignUpDto): Promise<Tokens> {
+    await this.validateEmailForSignUp(userRegister.email);
 
-    const hashedPassword = await this.hashService.hash(signUPDto.password);
+    const hashedPassword = await this.hashService.hash(userRegister.password);
 
     const user = await this.userService.create({
-      email: signUPDto.email,
-      username: signUPDto.username,
+      email: userRegister.email,
+      username: userRegister.username,
       password: hashedPassword,
+      role: userRegister.role,
     });
 
     return await this.getTokens({
