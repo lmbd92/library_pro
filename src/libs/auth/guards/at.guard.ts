@@ -19,7 +19,6 @@ export class AtGuard extends AuthGuard('jwt') {
 
   // canActivate: This method is called before the route handler. It determines whether the route can be accessed. It uses the Reflector to check if the 'IsPublic' metadata is set for the route handler or the controller class. If 'IsPublic' is true, the route can be accessed without authentication.
   canActivate(context: ExecutionContext): Promise<boolean> {
-    console.log(context);
     const isPublic = this.reflector.getAllAndOverride('IsPublic', [
       context.getHandler(),
       context.getClass(),
